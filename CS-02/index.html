@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>C-02</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .container { max-width: 400px; margin: auto; }
+        input[type="text"] { width: 100%; padding: 8px; margin-bottom: 10px; }
+        button { padding: 8px 16px; }
+        #result { margin-top: 15px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>C-02</h2>
+        <input type="text" id="wordInput" placeholder="Enter a word" />
+        <button onclick="countVowels()">Count</button>
+        <div id="result"></div>
+    </div>
+    <script>
+        function countVowels() {
+            const word = document.getElementById('wordInput').value;
+            let count = 0;
+            for (let i = 0; i < word.length; i++) {
+                const c = word[i].toLowerCase();
+                if ('aeiou'.includes(c)) {
+                    count++;
+                }
+            }
+            document.getElementById('result').textContent = "Number of vowels: " + count;
+        }
+    </script>
+</body>
+</html>
