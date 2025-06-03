@@ -1,0 +1,42 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #fafafa;
+  color: #222;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+h1 {
+  margin-bottom: 16px;
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+
+.choices {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+button.choice {
+  padding: 12px 24px;
+  font-size: 1rem;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button.choice:hover {
+  background: #f0f0f0;
+}
+
+.result, .score {
+  margin: 8px 0;
+  font-size: 1.1rem;
+}
