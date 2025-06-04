@@ -1,32 +1,28 @@
-let tasks = [];
-let taskId = 1;
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+let taskId = tasks.length ? Math.max(...tasks.map(t => t.id)) + 1 : 1;
 
-function loadTasks() {
-  const saved = localStorage.getItem('tasks');
-  if (saved) {
-    tasks = JSON.parse(saved);
-    taskId = Math.max(...tasks.map(t => t.id), 0) + 1;
-  }
-  render();
-}
+const elements = {
+  input: () => document.getElementById('taskInput'),
+  list: () => document.getElementById('tasksList'),
+  stats: () => document.getElementById('stats')
+};
 
 function saveTasks() {
   localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 function addTask() {
-  const input = document.getElementById('taskInput');
-  const text = input.value.trim();
-  
+  const text = elements.input().value.trim();
   if (!text) return;
   
   tasks.unshift({
     id: taskId++,
-    text: text,
-    completed: false
+    text,
+    completed: false,
+    time: Date.now()
   });
   
-  input.value = '';
+  elements.input().value = '';
   saveTasks();
   render();
 }
@@ -41,32 +37,80 @@ function toggleTask(id) {
 }
 
 function deleteTask(id) {
-  tasks = tasks.filter(t => t.id !== id);
+  const element = document.querySelector(`[data-id="${id}"]`);
+  element.style.animation = 'slideOut 0.3s ease forwards';
+  setTimeout(() => {
+    tasks = tasks.filter(t => t.id !== id);
+    saveTasks();
+    render();
+  }, 300);
+}
+
+function clearCompleted() {
+  tasks = tasks.filter(t => !t.completed);
   saveTasks();
   render();
 }
 
-function render() {
-  const list = document.getElementById('tasksList');
-  list.innerHTML = '';
+function getTimeAgo(timestamp) {
+  const diff = Date.now() - timestamp;
+  const minutes = Math.floor(diff / 60000);
+  const hours = Math.floor(diff / 3600000);
+  const days = Math.floor(diff / 86400000);
   
-  tasks.forEach(task => {
-    const item = document.createElement('div');
-    item.className = `task-item ${task.completed ? 'completed' : ''}`;
-    item.innerHTML = `
-      <div class="task-checkbox ${task.completed ? 'checked' : ''}" onclick="toggleTask(${task.id})">
-        ${task.completed ? '✓' : ''}
-      </div>
-      <span class="task-text">${task.text}</span>
-      <button class="delete-btn" onclick="deleteTask(${task.id})">×</button>
-    `;
-    list.appendChild(item);
-  });
+  if (minutes < 1) return 'now';
+  if (minutes < 60) return `${minutes}m`;
+  if (hours < 24) return `${hours}h`;
+  return `${days}d`;
 }
 
-document.getElementById('addTaskBtn').addEventListener('click', addTask);
-document.getElementById('taskInput').addEventListener('keypress', (e) => {
-  if (e.key === 'Enter') addTask();
-});
+function render() {
+  const completed = tasks.filter(t => t.completed).length;
+  elements.stats().textContent = `${tasks.length} tasks • ${completed} done`;
+  
+  if (!tasks.length) {
+    elements.list().innerHTML = `
+      <div class="empty">
+        <div class="empty-icon">✓</div>
+        <div class="empty-text">All clear</div>
+      </div>
+    `;
+    return;
+  }
+  
+  elements.list().innerHTML = tasks.map(task => `
+    <div class="task ${task.completed ? 'completed' : ''}" data-id="${task.id}">
+      <div class="task-check" onclick="toggleTask(${task.id})">
+        <div class="check-icon">${task.completed ? '✓' : ''}</div>
+      </div>
+      <div class="task-content">
+        <div class="task-text">${task.text}</div>
+        <div class="task-time">${getTimeAgo(task.time)}</div>
+      </div>
+      <div class="task-actions">
+        <button class="task-btn" onclick="deleteTask(${task.id})">×</button>
+      </div>
+    </div>
+  `).join('');
+}
 
-loadTasks();
+function init() {
+  elements.input().addEventListener('keydown', e => {
+    if (e.key === 'Enter') addTask();
+  });
+  
+  document.getElementById('addBtn').addEventListener('click', addTask);
+  document.getElementById('clearBtn').addEventListener('click', clearCompleted);
+  
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') elements.input().blur();
+    if (e.key === '/' && e.target !== elements.input()) {
+      e.preventDefault();
+      elements.input().focus();
+    }
+  });
+  
+  render();
+}
+
+init();
