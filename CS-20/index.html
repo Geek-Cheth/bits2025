@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typing Speed Test | C-20</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="app">
+      <header class="header">
+        <h1>⚡ Typing Speed Test</h1>
+        <div class="stats">
+          <div class="stat">
+            <span class="label">Time</span>
+            <span id="timer" class="value">0s</span>
+          </div>
+          <div class="stat">
+            <span class="label">WPM</span>
+            <span id="wpm" class="value">0</span>
+          </div>
+          <div class="stat">
+            <span class="label">Accuracy</span>
+            <span id="accuracy" class="value">100%</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="text-display">
+          <p id="textToType" class="text-content"></p>
+        </div>
+        
+        <div class="input-section">
+          <textarea id="userInput" class="typing-input" placeholder="Click Start and begin typing here..." disabled></textarea>
+        </div>
+
+        <div class="controls">
+          <button id="startBtn" class="btn primary">Start Test</button>
+          <button id="restartBtn" class="btn secondary" style="display: none;">Try Again</button>
+        </div>
+
+        <div id="results" class="results" style="display: none;">
+          <h2>Test Results</h2>
+          <div class="result-stats">
+            <div class="result-item">
+              <span class="result-label">Time Taken:</span>
+              <span id="finalTime" class="result-value"></span>
+            </div>
+            <div class="result-item">
+              <span class="result-label">Words per Minute:</span>
+              <span id="finalWPM" class="result-value"></span>
+            </div>
+            <div class="result-item">
+              <span class="result-label">Accuracy:</span>
+              <span id="finalAccuracy" class="result-value"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
