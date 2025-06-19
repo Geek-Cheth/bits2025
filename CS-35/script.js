@@ -1,5 +1,5 @@
 const API_KEY = '23e7342c58ca52e1e3f467d2c869988b';
-const API_URL = 'http://api.openweathermap.org/data/2.5/weather';
+const API_URL = 'https://api.openweathermap.org/data/2.5/weather';
 
 class WeatherApp {
     constructor() {
