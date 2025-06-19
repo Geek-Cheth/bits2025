@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Picker Tool</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Color Picker Tool</h1>
+            <div class="creator">by syntaxError</div>
+        </header>
+        
+        <main>
+            <div class="color-picker-section">
+                <label for="colorInput" class="color-label">Pick a Color</label>
+                <input type="color" id="colorInput" value="#3b82f6" class="color-input">
+            </div>
+            
+            <div class="color-display">
+                <div class="color-preview" id="colorPreview"></div>
+            </div>
+            
+            <div class="color-info">
+                <div class="color-code-group">
+                    <label>HEX</label>
+                    <div class="color-code-container">
+                        <span id="hexValue">#3b82f6</span>
+                        <button class="copy-btn" data-type="hex" title="Copy HEX">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="color-code-group">
+                    <label>RGB</label>
+                    <div class="color-code-container">
+                        <span id="rgbValue">rgb(59, 130, 246)</span>
+                        <button class="copy-btn" data-type="rgb" title="Copy RGB">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="color-code-group">
+                    <label>HSL</label>
+                    <div class="color-code-container">
+                        <span id="hslValue">hsl(217, 91%, 60%)</span>
+                        <button class="copy-btn" data-type="hsl" title="Copy HSL">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="notification" id="notification">
+                Color code copied to clipboard!
+            </div>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

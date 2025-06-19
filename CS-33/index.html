@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator | C-33</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="calculator">
+            <h1>BMI Calculator</h1>
+            <p class="description">Calculate your Body Mass Index and find your health category</p>
+            
+            <form id="bmi-form" class="form">
+                <div class="input-group">
+                    <label for="weight">Weight (kg)</label>
+                    <input type="number" id="weight" placeholder="Enter your weight in kg" step="0.1" min="1" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="height">Height (cm)</label>
+                    <input type="number" id="height" placeholder="Enter your height in cm" step="0.1" min="50" required>
+                </div>
+                
+                <button type="submit" class="calculate-btn">Calculate BMI</button>
+            </form>
+            
+            <div id="result" class="result hidden">
+                <div class="result-content">
+                    <h2>Your BMI Result</h2>
+                    <div class="bmi-value">
+                        <span id="bmi-number">0</span>
+                    </div>
+                    <div class="category" id="category">
+                        <span id="category-text">Normal</span>
+                    </div>
+                    <div class="details" id="details">
+                        <p id="details-text"></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bmi-chart">
+                <h3>BMI Categories</h3>
+                <div class="chart-items">
+                    <div class="chart-item underweight">
+                        <span class="range">Below 18.5</span>
+                        <span class="label">Underweight</span>
+                    </div>
+                    <div class="chart-item normal">
+                        <span class="range">18.5 - 24.9</span>
+                        <span class="label">Normal Weight</span>
+                    </div>
+                    <div class="chart-item overweight">
+                        <span class="range">25.0 - 29.9</span>
+                        <span class="label">Overweight</span>
+                    </div>
+                    <div class="chart-item obese">
+                        <span class="range">30.0 and above</span>
+                        <span class="label">Obese</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
